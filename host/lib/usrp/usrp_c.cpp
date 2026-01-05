@@ -119,10 +119,10 @@ uhd_error uhd_rx_streamer_recv(uhd_rx_streamer_handle h,
     bool one_packet,
     size_t* items_recvd)
 {
-    /*****
+    /******
     Added function since UHD cannot handle LV array natively. (lines 126, 127)
     Note: this change breaks UHD API and the UHD lib won't work with other UHD related programs or scripts. It's a dirty hack that does trick for demo
-    *****/
+    ******/
     char* buf_data = (char*)buffs; 
     buffs = (void**)&buf_data;
 
