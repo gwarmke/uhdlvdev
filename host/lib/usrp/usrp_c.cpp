@@ -181,6 +181,13 @@ uhd_error uhd_tx_streamer_send(uhd_tx_streamer_handle h,
     double timeout,
     size_t* items_sent)
 {
+    /*****
+    Added function since UHD cannot handle LV array natively. (lines 188, 189)
+    Note: this change breaks UHD API and the UHD lib won't work with other UHD related programs or scripts. It's a dirty hack that does trick for demo
+    *****/
+    char* buf_data = (char*)buffs; 
+    buffs = (void**)&buf_data;
+
     UHD_SAFE_C_SAVE_ERROR(
         h, uhd::tx_streamer::buffs_type buffs_cpp(buffs, h->streamer->get_num_channels());
         *items_sent = h->streamer->send(
