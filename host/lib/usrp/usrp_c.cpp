@@ -282,6 +282,14 @@ uhd_error uhd_usrp_get_rx_stream(
         usrp_ptr& usrp  = get_usrp_ptrs()[h_u->usrp_index];
         h_s->streamer   = usrp.ptr->get_rx_stream(stream_args_c_to_cpp(stream_args));
         h_s->usrp_index = h_u->usrp_index;)
+
+        /******
+        Added code for LV channel settings below.
+        This overwrites whatever LV had given as a channel list, b/c UHD cannot handle LV arrays. 
+        We would need to fix that if we want to go to arbitrary channels or multichannel.
+        ******/
+        size_t ch[1] = {0};
+        stream_args->channel_list=ch;
 }
 
 static std::mutex _usrp_get_tx_stream_mutex;
