@@ -175,7 +175,7 @@ uhd_error uhd_tx_streamer_max_num_samps(
 }
 
 uhd_error uhd_tx_streamer_send(uhd_tx_streamer_handle h,
-    const void** buffs,
+    void** buffs,
     size_t samps_per_buff,
     uhd_tx_metadata_handle* md,
     double timeout,
