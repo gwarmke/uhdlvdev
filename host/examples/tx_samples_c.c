@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
 
     size_t samps_per_buff;
     float* buff            = NULL;
-    void** buffs_ptr = NULL;
+    const void** buffs_ptr = NULL;
 
     // Set rate
     fprintf(stderr, "Setting TX Rate: %f...\n", rate);
@@ -164,7 +164,7 @@ int main(int argc, char* argv[])
         free_tx_streamer, uhd_tx_streamer_max_num_samps(tx_streamer, &samps_per_buff))
     fprintf(stderr, "Buffer size in samples: %zu\n", samps_per_buff);
     buff      = calloc(samps_per_buff * 2, sizeof(float));
-    buffs_ptr = (void**)&buff;
+    buffs_ptr = (const void**)&buff;
     size_t i  = 0;
     for (i = 0; i < (samps_per_buff * 2); i += 2) {
         buff[i]     = 0.1f;
